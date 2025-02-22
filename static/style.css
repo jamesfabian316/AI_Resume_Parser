@@ -1,0 +1,265 @@
+/* Universal box-sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* CSS Variables */
+:root {
+    --primary-color: #007BFF;
+    --primary-hover: #0056b3;
+    --background-color: #f0f2f5;
+    --text-color: #2c3e50;
+    --heading-color: #34495e;
+    --accent-color: #2980b9;
+    --accent-border: #3498db;
+    --card-bg: #ffffff;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Global Styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 20px;
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #0070f3, #79ffe1);
+    color: #fff;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 1.2em;
+    line-height: 1.5;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+/* Form Styles */
+form {
+    margin-bottom: 30px;
+}
+
+/* Custom File Input */
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.custom-file-label:hover {
+    background-color: var(--primary-hover);
+}
+
+/* (Optional) Style button if used later */
+button {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 10px;
+}
+
+button:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Result Container and Card */
+.result-container {
+    display: none;
+    text-align: left;
+}
+
+h2 {
+    color: var(--heading-color);
+    margin-bottom: 15px;
+}
+
+.resume-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px var(--card-shadow);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Section Styles */
+.section {
+    margin-bottom: 20px;
+}
+
+.section h3 {
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--accent-border);
+    padding-bottom: 5px;
+}
+
+.section p {
+    margin: 5px 0;
+    color: var(--text-color);
+}
+
+.section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.section ul li {
+    margin: 5px 0;
+    padding: 8px;
+    background-color: #ecf0f1;
+    border-radius: 5px;
+    color: var(--text-color);
+}
+
+.section ul li span {
+    font-weight: bold;
+    color: #7f8c8d;
+}
+
+/* Skills List */
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skills-list li {
+    background-color: var(--accent-border);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0 10px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        margin-bottom: 15px;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .result-container {
+        padding: 0;
+    }
+
+    .resume-card {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .section h3 {
+        font-size: 1.2em;
+        margin-bottom: 8px;
+    }
+
+    .section p,
+    .section ul li {
+        font-size: 0.95em;
+    }
+
+    .skills-list {
+        gap: 5px;
+    }
+
+    .skills-list li {
+        padding: 3px 8px;
+        font-size: 12px;
+    }
+}
+
+/* Loading Overlay */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--background-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* Spinner */
+.spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

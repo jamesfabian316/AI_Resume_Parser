@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Effortlessly extract personal details, education, work experience, and skills from your resume using advanced AI algorithms.">
+    <title>AI Resume Parser</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <!-- Loading Overlay -->
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>AI Resume Parser</h1>
+            <p>Effortlessly extract personal details, education, work experience, and skills from your resume using
+                advanced AI algorithms.</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <h2>Upload Your Resume</h2>
+        <form id="uploadForm" novalidate>
+            <label for="resume" class="custom-file-label">Choose Resume (PDF)</label>
+            <input type="file" id="resume" name="resume" accept=".pdf" required>
+        </form>
+        <div id="result" class="result-container" style="display: none;">
+            <h2>Parsed Resume Data</h2>
+            <div id="parsed-data" class="resume-card">
+                <!-- Parsed data will be injected here by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Fallback for users with JavaScript disabled -->
+    <noscript>
+        <p>Please enable JavaScript to use the AI Resume Parser.</p>
+    </noscript>
+
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</body>
+
+</html>
