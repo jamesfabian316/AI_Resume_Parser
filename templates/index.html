@@ -5,44 +5,123 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Effortlessly extract personal details, education, work experience, and skills from your resume using advanced AI algorithms.">
-    <title>AI Resume Parser</title>
+        content="AI-powered resume parser and skill matcher - Upload multiple resumes and find the perfect match based on required skills.">
+    <meta name="theme-color" content="#3498db">
+    <title>AI Resume Parser & Skill Matcher</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
     <!-- Loading Overlay -->
-    <div id="loading-overlay">
-        <div class="spinner"></div>
+    <div id="loading-overlay" role="alert" aria-live="polite">
+        <div class="spinner" aria-hidden="true"></div>
+        <p>Processing resumes... <span id="progress-text"></span></p>
     </div>
 
     <!-- Hero Section -->
     <header class="hero">
         <div class="hero-content">
-            <h1>AI Resume Parser</h1>
-            <p>Effortlessly extract personal details, education, work experience, and skills from your resume using
-                advanced AI algorithms.</p>
+            <h1><i class="fas fa-file-search"></i> AI Resume Parser</h1>
+            <p>Harness the power of AI to analyze multiple resumes and find the perfect skill matches instantly.</p>
+            <div class="hero-features">
+                <div class="feature">
+                    <i class="fas fa-bolt"></i>
+                    <span>Fast Processing</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-brain"></i>
+                    <span>AI-Powered</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-bullseye"></i>
+                    <span>Accurate Matching</span>
+                </div>
+            </div>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="container">
-        <h2>Upload Your Resume</h2>
-        <form id="uploadForm" novalidate>
-            <label for="resume" class="custom-file-label">Choose Resume (PDF)</label>
-            <input type="file" id="resume" name="resume" accept=".pdf" required>
-        </form>
-        <div id="result" class="result-container" style="display: none;">
-            <h2>Parsed Resume Data</h2>
-            <div id="parsed-data" class="resume-card">
-                <!-- Parsed data will be injected here by JavaScript -->
-            </div>
+        <div class="card upload-card">
+            <section class="upload-section" aria-labelledby="upload-heading">
+                <h2 id="upload-heading"><i class="fas fa-cloud-upload-alt"></i> Upload Resumes</h2>
+                <form id="uploadForm">
+                    <div class="upload-area">
+                        <label for="resumes" class="file-label">
+                            <div class="upload-icon">
+                                <i class="fas fa-file-upload"></i>
+                            </div>
+                            <span class="upload-title">Choose Resumes or Drop Files Here</span>
+                            <span class="upload-subtitle">PDF or DOCX files accepted</span>
+                            <span class="upload-hint">Up to 50 files, 10MB each</span>
+                        </label>
+                        <input type="file" id="resumes" name="resume" accept=".pdf,.docx" multiple required>
+                        <div id="selectedFiles" class="selected-files"></div>
+                    </div>
+
+                    <div class="skills-section">
+                        <label for="skillInput" class="skills-label">
+                            <i class="fas fa-tools"></i> Required Skills
+                            <span class="skills-hint"><i class="fas fa-keyboard"></i> Press Enter after each
+                                skill</span>
+                        </label>
+                        <div class="skill-input-container">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="skillInput" placeholder="Type a skill (e.g., Python, JavaScript)"
+                                aria-describedby="skillHint">
+                        </div>
+                        <div id="skillTags" class="skill-tags" aria-live="polite"></div>
+                    </div>
+
+                    <div class="submit-section">
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-robot"></i>
+                            <span>Analyze Resumes</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
         </div>
+
+        <section id="result" class="result-container" style="display: none;" aria-labelledby="results-heading">
+            <h2 id="results-heading"><i class="fas fa-chart-bar"></i> Analysis Results</h2>
+
+            <div class="results-header card">
+                <div class="stats">
+                    <div class="stat-item">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Total Resumes: <span id="totalCount" class="stat-value">0</span></span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Matching Resumes: <span id="matchCount" class="stat-value">0</span></span>
+                    </div>
+                </div>
+                <div class="filter">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="showMatchingOnly">
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-label">Show matching resumes only</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="parsed-data" class="results-grid"></div>
+        </section>
     </main>
+
+    <footer class="footer">
+        <p>Powered by Advanced AI Technology</p>
+        <p><i class="fas fa-shield-alt"></i> Your data is processed securely and not stored</p>
+    </footer>
 
     <!-- Fallback for users with JavaScript disabled -->
     <noscript>
-        <p>Please enable JavaScript to use the AI Resume Parser.</p>
+        <div class="noscript-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>Please enable JavaScript to use the AI Resume Parser.</p>
+        </div>
     </noscript>
 
     <script src="{{ url_for('static', filename='script.js') }}" defer></script>
